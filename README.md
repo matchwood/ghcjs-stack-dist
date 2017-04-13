@@ -24,3 +24,5 @@ The following snapshots are currently supported:
 | lts8.0 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008000.tar.gz |
 | lts8.5 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008005.tar.gz |
 
+## Cautionary notes
+While I have used these repacked versions of ghcjs to successfully compile working applications (including reflex and reflex-dom) they do fail a couple of tests - see this issue for more information https://github.com/ghcjs/ghcjs/issues/571 . 
