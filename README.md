@@ -18,13 +18,14 @@ Eg:
         source:
           ghcjs-0.2.1.9008000_ghc-8.0.2:
             url: https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008000.tar.gz
+            sha1: 815f26834ac25d72f58792524740fe3cca0ce3a6
 
 The following snapshots are currently supported:
 
-| Resolver | Url |
-| --- | --- |
-| lts8.0 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008000.tar.gz |
-| lts8.5 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008005.tar.gz |
+| Resolver | Url | sha1 |
+| --- | --- | --- |
+| lts8.0 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008000.tar.gz | 815f26834ac25d72f58792524740fe3cca0ce3a6 |
+| lts8.5 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008005.tar.gz | 903ef8646719b688ccf6cd416e4d588a7d4ec911 |
 
 ## Cautionary notes
 While I have used these repacked versions of ghcjs to successfully compile working applications (including reflex and reflex-dom) they do fail a couple of tests - see this issue for more information https://github.com/ghcjs/ghcjs/issues/571 . 
