@@ -35,7 +35,7 @@ Eg:
       ghcjs:
         source: |
           ghcjs-0.2.1.9008011_ghc-8.0.2:
-            url: https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008011_ghc.tar.gz
+            url: https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008011.tar.gz
             sha1: a72a5181124baf64bcd0e68a8726e65914473b3b
 
 
