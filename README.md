@@ -6,26 +6,39 @@ I have forked [ghcjs](https://github.com/matchwood/ghcjs), [ghcjs-base](https://
 
 I have only tested these on linux, they have **not been tested on Windows**. If you'd like to use them on Windows then please give them a go, and let me know if you encounter issues.
 
+## IMPORTANT: note on Aeson
+GHCJS depends on Aeson as a boot package. The version of Aeson in lts-8* includes some C code, and there is not currently a fully operational JS shim for it - see [this issue](https://github.com/bos/aeson/issues/471) for more information. Starting from 1.1.1.0 aeson offers a pure Haskell implementation via a flag. So from the perspective of ghcjs, you have two options - 
+  1) Implement your own JS shim
+  2) Use aeson 1.1.1.0 + 
+I have gone for the second option for these distributions of ghcjs, so they come with aeson 1.1.1.0 as a boot package. This means that, firstly, you might need `allow-newer: true` in your stack.yaml, and secondly that stack will give you warnings about this, eg: 
+
+    Ignoring that the GHCJS boot package "aeson" has a different version, 1.1.1.0, than the resolver's wanted version, 1.0.2.1
+
+You may also get out of range warnings from other packages, like 
+
+    WARNING: Ignoring out of range dependency (allow-newer enabled): aeson-1.1.1.0. reflex-dom requires: >=0.8 && <1.1
+
+This is far from ideal. Hopefully lts-9 will include a new version of aeson, and this issue will go away. Alternatively, we need to write a JS shim to support lts-8 properly.
+
 ## How to use
 In your stack.yaml, instead of using eg `http://ghcjs.tolysz.org/ghc-8.0-2017-01-11-lts-7.15-9007015.tar.gz` simply link to the archive in this git repo.
 Eg: 
 
-    resolver: lts-8.0
-    compiler: ghcjs-0.2.1.9008000_ghc-8.0.2
+    resolver: lts-8.11
+    compiler: ghcjs-0.2.1.9008011_ghc-8.0.2
     compiler-check: match-exact
     setup-info:
       ghcjs:
         source: |
-          ghcjs-0.2.1.9008000_ghc-8.0.2:
-            url: https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008000.tar.gz
-            sha1: 815f26834ac25d72f58792524740fe3cca0ce3a6
+          ghcjs-0.2.1.9008011_ghc-8.0.2:
+            url: https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008011_ghc.tar.gz
+            sha1: a72a5181124baf64bcd0e68a8726e65914473b3b
 
 The following snapshots are currently supported:
 
 | Resolver | Url | sha1 |
 | --- | --- | --- |
-| lts-8.0 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008000.tar.gz | 815f26834ac25d72f58792524740fe3cca0ce3a6 |
-| lts-8.5 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008005.tar.gz | 903ef8646719b688ccf6cd416e4d588a7d4ec911 |
+| lts-8.11 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008011.tar.gz | a72a5181124baf64bcd0e68a8726e65914473b3b |
 
 ## Cautionary notes
 While I have used these repacked versions of ghcjs to successfully compile working applications (including reflex and reflex-dom) they do fail a couple of tests - see this issue for more information https://github.com/ghcjs/ghcjs/issues/571 . 
