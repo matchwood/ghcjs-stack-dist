@@ -8,7 +8,7 @@ I have only tested these on linux, they have **not been tested on Windows**. If 
 
 
 ## How to use
-In your stack.yaml, instead of using eg `http://ghcjs.tolysz.org/ghc-8.0-2017-01-11-lts-7.15-9007015.tar.gz` simply link to the archive in this git repo.
+In your stack.yaml, instead of using eg `http://ghcjs.tolysz.org/ghc-8.0-2017-01-11-lts-7.15-9007015.tar.gz` simply link to the archive in this git repo. Please be aware of possible issues with `nodenv` and `cabal` - see below for more details.
 Eg:
 
     resolver: lts-8.11
@@ -27,7 +27,7 @@ The following snapshots are currently supported:
 | Resolver | Compiler | Url | sha1 |
 | --- | --- | --- | --- |
 | lts-8.11 | ghcjs-0.2.1.9008011_ghc-8.0.2 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008011.tar.gz | a72a5181124baf64bcd0e68a8726e65914473b3b |
-| lts-9.21 | ghcjs-0.2.1.9009021_ghc-8.0.2 | https://github.com/matchwood/ghcjs-stack-dist/raw/develop/ghcjs-0.2.1.9009021.tar.gz | b1740c3c99e5039ac306702894cd6e58283f4d31 |
+| lts-9.21 | ghcjs-0.2.1.9009021_ghc-8.0.2 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9009021.tar.gz | b1740c3c99e5039ac306702894cd6e58283f4d31 |
 
 ## Cautionary notes
 While I have used these repacked versions of ghcjs to successfully compile working applications (including reflex and reflex-dom) they do fail a couple of tests - see these issues for more information https://github.com/ghcjs/ghcjs/issues/571 & https://github.com/ghcjs/ghcjs/issues/644.
@@ -49,6 +49,17 @@ This is far from ideal - the api changes in aeson 1.1.0.0 are fortunately [not m
 
 ### Consistency with server side code if using lts8.x
 Bear in mind that if you are also compiling code with ghc (sharing code between server and client for instance) then you will probably want to use the same version of aeson in your server project stack.yaml, i.e. add `- aeson-1.1.1.0` to your `extra-deps` section.
+
+### Cabal version
+The ghcjs code used in the 9.21 distribution makes use of some features of cabal 2, despite the fact that the cabal version in the lts-9.21 snapshot is at 1.24. If you try to install this distribution when you either have cabal installed in your working directory or a global cabal < 2 then you will run into an error that looks like 
+
+```
+    fatal: cabal-install program /Users/user/.local/bin/cabal does not support --allow-boot-library-installs (requires version 2.0.0.0 or newer)
+    Booting GHCJS (this will take a long time) ...Process exited with ExitFailure 1: /Users/user/.stack/programs/x86_64-osx/ghcjs-0.2.1.9009021_ghc-8.0.2/src/.stack-work/install/x86_64-osx/lts-9.21/8.0.2/bin/ghcjs-boot --clean
+
+```
+
+All you need to do is to ensure that you have cabal 2 installed globally, and if necessary temporarily rename the cabal executable in your local `.stack-work` folder.
 
 ### Issues with Nodenv
 If you are using `nodenv` to manage your node installations, you are better off disabling this before doing your first `stack setup` (or `stack build`), which will cause GHCJS to be downloaded and set up.
