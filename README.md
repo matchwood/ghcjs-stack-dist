@@ -27,7 +27,9 @@ The following snapshots are currently supported:
 | Resolver | Compiler | Url | sha1 |
 | --- | --- | --- | --- |
 | lts-8.11 | ghcjs-0.2.1.9008011_ghc-8.0.2 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9008011.tar.gz | a72a5181124baf64bcd0e68a8726e65914473b3b |
-| lts-9.21 | ghcjs-0.2.1.9009021_ghc-8.0.2 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9009021.tar.gz | b1740c3c99e5039ac306702894cd6e58283f4d31 |
+| lts-9.21 | ghcjs-0.2.1.9009021_ghc-8.0.2 | https://github.com/matchwood/ghcjs-stack-dist/raw/master/ghcjs-0.2.1.9009021.1.tar.gz | db8cd3252e47dbef3db7d1cf0d6d997e8d029f84 |
+
+There was a [bytestring issue](https://github.com/matchwood/ghcjs-stack-dist/issues/11) in the original lts9.21 release.
 
 ## Cautionary notes
 While I have used these repacked versions of ghcjs to successfully compile working applications (including reflex and reflex-dom) they do fail a couple of tests - see these issues for more information https://github.com/ghcjs/ghcjs/issues/571 & https://github.com/ghcjs/ghcjs/issues/644.
